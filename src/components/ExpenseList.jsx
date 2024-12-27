@@ -1,86 +1,110 @@
-import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-const ListContainer = styled.div`
-  background: white;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-`
+const Section = styled.section`
+  /* 배경색 */
+  background-color: #ffffff;
+  /* 둥근 모서리 */
+  border-radius: 16px;
+  /* 내부 공간 */
+  padding: 20px;
+`;
+
+const ExpenseItemList = styled.div`
+  /* 가로 정렬 */
+  display: flex;
+  /* 세로 정렬로 변경 */
+  flex-direction: column;
+  /* 간격 */
+  gap: 10px;
+`;
 
 const ExpenseItem = styled.div`
+  /* 가로 정렬 */
   display: flex;
+  /* 양쪽 끝 정렬 */
   justify-content: space-between;
+  /* 교차축 정렬 */
   align-items: center;
-  padding: 15px;
-  border-bottom: 1px solid #f1f3f5;
+  /* 내부 공간 */
+  padding: 15px 20px;
+  /* 둥근 모서리 */
+  border-radius: 8px;
+  /* 배경색 */
+  background-color: #f9f9f9;
+  /* 그림자 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* 호버 시 애니메이션 효과 */
+  transition: transform 0.2s ease-in-out;
+  /* 마우스 오버 시 포인터 표시 */
   cursor: pointer;
-  transition: background-color 0.2s;
+  /* 링크 밑줄 제거 */
+  text-decoration: none;
 
+  /* 호버 시 확대 */
   &:hover {
-    background-color: #f8f9fa;
+    transform: scale(1.02);
   }
 
-  &:last-child {
-    border-bottom: none;
+  /* 자식 요소 */
+  span {
+    font-size: 16px;
+    color: #333;
   }
-`
 
-const Date = styled.div`
-  color: #868e96;
-  font-size: 14px;
-  width: 100px;
-`
+  /* 마지막 자식 요소 */
+  span:last-child {
+    font-weight: bold;
+    color: #007bff;
+    flex-shrink: 0;
+  }
+`;
 
-const Content = styled.div`
-  flex: 1;
-  margin: 0 20px;
-`
+const ExpenseDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
-const Title = styled.div`
-  font-size: 15px;
-  color: #495057;
-  margin-bottom: 4px;
-  font-weight: 500;
-`
-
-const Description = styled.div`
-  font-size: 13px;
-  color: #868e96;
-`
-
-const Amount = styled.div`
-  font-size: 15px;
-  color: #0066FF;
-  font-weight: 600;
-  text-align: right;
-  width: 120px;
-`
-
-const ExpenseList = () => {
-  const dummyData = [
-    {
-      date: "2024-12-24",
-      title: "짜장면",
-      description: "회식",
-      amount: "3,000"
+  span {
+    &:first-child {
+      margin-bottom: 5px;
+      color: #666;
+      font-size: 14px;
     }
-  ];
 
+    &:last-child {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+  }
+`;
+
+export default function ExpenseList({ expenses }) {
   return (
-    <ListContainer>
-      {dummyData.map((item, index) => (
-        <ExpenseItem key={index}>
-          <Date>{item.date.replace(/-/g, '.')}</Date>
-          <Content>
-            <Title>{item.title}</Title>
-            {item.description && <Description>{item.description}</Description>}
-          </Content>
-          <Amount>{item.amount}원</Amount>
-        </ExpenseItem>
-      ))}
-    </ListContainer>
+    <Section>
+      <ExpenseItemList>
+        {expenses.map((expense) => (
+          <ExpenseItem
+            key={expense.id}
+            as={Link}
+            to={`/expenses/${expense.id}`}
+          >
+            <ExpenseDetails>
+              <span>{expense.date}</span>
+              <span>
+                {expense.item} - {expense.description}
+              </span>
+            </ExpenseDetails>
+            <span>{expense.amount} 원</span>
+          </ExpenseItem>
+        ))}
+      </ExpenseItemList>
+    </Section>
   );
-};
-
-export default ExpenseList;
+}

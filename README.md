@@ -1,9 +1,27 @@
-# React + Vite
+# 나의 가계부 앱
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+개인 재무를 관리하고 지출을 효율적으로 추적할 수 있는 현대적인 웹 애플리케이션입니다.
 
-Currently, two official plugins are available:
+## 주요 기능
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# tex2
+- 💰 수입 및 지출 추적
+- 📊 차트를 통한 재무 데이터 시각화
+- 📱 모바일과 데스크톱에 최적화된 반응형 디자인
+- 🔐 Supabase를 통한 안전한 인증
+- 📅 날짜별 재무 추적
+- 💼 카테고리별 지출 관리
+
+## 사용 기술
+
+- React + Vite
+- Supabase (백엔드 및 인증)
+- JavaScript/JSX
+- CSS (스타일링)
+- Chart.js (데이터 시각화)
+
+## 시작하기
+
+1. 저장소 복제:
+```bash
+git clone [저장소-URL]
+cd my-finance-app
